@@ -4,5 +4,30 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+}
+
+model Usuario {
+  id        String    @id @default(cuid())
+  user      String    @unique
+  password  String // hash bcrypt
+  createdAt DateTime  @default(now())
+  entradas  Entrada[]
+}
+
+model Entrada {
+  id          String   @id @default(cuid())
+  tmdbId      Int
+  title       String
+  posterPath  String?
+  year        Int?
+  watchedDate DateTime @db.Date
+  rating      Float?
+  review      String?
+  rewatch     Boolean  @default(false)
+  createdAt   DateTime @default(now())
+
+  userId String
+  user   Usuario @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, watchedDate])
 }
