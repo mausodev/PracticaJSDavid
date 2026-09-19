@@ -16,7 +16,7 @@ import { postJson } from "@/lib/api";
 
 const hoy = () => new Date().toISOString().slice(0, 10);
 
-export function NuevaEntrada({ id, user }) {
+export function NuevaEntrada({ id }) {
   const [abierto, setAbierto] = useState(false);
   const queryClient = useQueryClient();
 
@@ -29,7 +29,7 @@ export function NuevaEntrada({ id, user }) {
   const crear = useMutation({
     mutationFn: (datos) => postJson("/api/diario", datos),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["diario", user, Number(id)] });
+      queryClient.invalidateQueries({ queryKey: ["diario", Number(id)] });
       setAbierto(false);
     },
   });

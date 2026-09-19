@@ -17,14 +17,22 @@ const schema = z.object({
 });
 
 export async function GET(request) {
-  const user = new URL(request.url).searchParams.get("user")?.trim();
-  if (!user) {
-    return NextResponse.json({ error: "Falta el parámetro user" }, { status: 400 });
+  const params = new URL(request.url).searchParams;
+  const user = params.get("user")?.trim();
+  const tmdbId = params.get("tmdbId");
+
+  // Al menos un filtro: sin esto sería un volcado de toda la tabla.
+  if (!user && !tmdbId) {
+    return NextResponse.json({ error: "Falta el parámetro user o tmdbId" }, { status: 400 });
   }
 
   const entradas = await prisma.entrada.findMany({
-    where: { user: { user } },
+    where: {
+      ...(user && { user: { user } }),
+      ...(tmdbId && { tmdbId: Number(tmdbId) }),
+    },
     orderBy: [{ watchedDate: "desc" }, { createdAt: "desc" }],
+    include: { user: { select: { user: true } } },
   });
 
   return NextResponse.json({ entradas });
