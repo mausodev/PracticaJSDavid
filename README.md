@@ -1,36 +1,52 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Pelis APP
 
-## Getting Started
+Este proyecto se planteó en un inicio como algo tipo Letterboxd: una app donde las personas registran las películas que ven y las califican. Por cuestiones de tiempo terminó siendo una web-app donde podemos ver y dejar reviews de películas.
 
-First, run the development server:
+El proyecto cuenta con:
+
+- Auth (login, registro y rutas protegidas)
+- Películas en tendencia
+- Recomendaciones de películas similares
+- Altas y bajas de reviews de películas
+
+La información de las películas se toma del servicio **TMDB**, al cual nos conectamos mediante API REST.
+
+El proyecto está hecho en **Next.js con JavaScript**. Next.js es un framework full stack: cuenta con React en la parte del front y su propia tecnología en el back. Además utiliza una pequeña base de datos en **PostgreSQL** (aunque solo cuenta con 2 tablas).
+
+## Cómo ejecutarlo
+
+El único requisito para correr el proyecto es tener instalado **Docker** y **Docker Compose**. En caso de no tenerlo, se puede instalar aquí:
+
+https://www.docker.com/products/docker-desktop/
+
+Luego se deben poner los valores correctos de los secretos `TMDB_ACCESS_TOKEN` y `JWT_SECRET` en el archivo `docker-compose.yml` y guardar los cambios. Estos serán enviados por email.
+
+Finalmente, para ejecutar el proyecto se debe abrir una terminal en la raíz del proyecto y ejecutar el comando:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+docker compose up
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Una vez aparezca lo siguiente:
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+![Terminal mostrando las migraciones aplicadas y el servidor listo](https://i.ibb.co/Rp53BhVD/Captura-de-pantalla-2026-09-19-a-la-s-3-12-28-p-m.png)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+...el proyecto está listo, y solo hay que ir en el navegador a http://localhost:3000
 
-## Learn More
+> **Nota:** la primera vez que se ejecuta `docker compose up` puede tardar varios minutos en arrancar (dependiendo de la velocidad de internet y de la computadora).
 
-To learn more about Next.js, take a look at the following resources:
+Probado y funcionando correctamente en **Debian** y **macOS**.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Imágenes del proyecto
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Registro de un nuevo usuario:
 
-## Deploy on Vercel
+![Pantalla de registro](https://i.ibb.co/kggcdk7c/brave-screenshot-localhost3.png)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Inicio, con el buscador y las películas populares:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+![Inicio con buscador y películas populares](https://i.ibb.co/60zf4Bkw/brave-screenshot-localhost.png)
+
+Detalle de una película, con sus críticas y las recomendaciones:
+
+![Detalle de Interestelar con críticas y películas similares](https://i.ibb.co/5xvVnHXb/brave-screenshot-localhost2.png)
