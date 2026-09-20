@@ -37,6 +37,10 @@ Una vez aparezca lo siguiente:
 
 Probado y funcionando correctamente en **Debian** y **macOS**.
 
+### Respuesta a preguntas:
+**Fecha de inicio:** Jueves 17 de Septiembre (poco antes de medianoche jaja).
+**Tiempo real en horas en las que te llevo hacer este ejercicio:** Aproximadamente 6 horas. El proyecto lo iba avanzando poco a poco en mis ratos libres... Batalle un poco en imaginar que hacer! 
+
 ## Imágenes del proyecto
 
 Registro de un nuevo usuario:
